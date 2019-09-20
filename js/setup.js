@@ -11,15 +11,19 @@ var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Валь
 var coatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
 
+var getRandomElement = function (arr) {
+  return arr[Math.round((arr.length - 1) * Math.random())];
+};
+
 var createRandomWizardArray = function (amount) {
   var wizardsArray = [];
 
   for (var i = 0; i < amount; i++) {
     var randomWizard = {};
 
-    randomWizard.name = names[Math.round((names.length - 1) * Math.random())] + ' ' + surnames[Math.round((surnames.length - 1) * Math.random())];
-    randomWizard.coatColor = coatColors[Math.round((coatColors.length - 1) * Math.random())];
-    randomWizard.eyesColor = eyesColors[Math.round((eyesColors.length - 1) * Math.random())];
+    randomWizard.name = getRandomElement(names) + ' ' + getRandomElement(surnames);
+    randomWizard.coatColor = getRandomElement(coatColors);
+    randomWizard.eyesColor = getRandomElement(eyesColors);
 
     wizardsArray.push(randomWizard);
   }
@@ -40,13 +44,18 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
+var createSimilarWizards = function (arr) {
+  var fragment = document.createDocumentFragment();
+
+  for (var i = 0; i < arr.length; i++) {
+    fragment.appendChild(renderWizard(arr[i]));
+  }
+
+  similarListElement.appendChild(fragment);
+};
+
 var wizards = createRandomWizardArray(WIZARD_AMOUNT);
-var fragment = document.createDocumentFragment();
+createSimilarWizards(wizards);
 
-for (var i = 0; i < wizards.length; i++) {
-  fragment.appendChild(renderWizard(wizards[i]));
-}
-
-similarListElement.appendChild(fragment);
 
 document.querySelector('.setup-similar').classList.remove('hidden');
