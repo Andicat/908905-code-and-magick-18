@@ -1,6 +1,8 @@
 'use strict';
 
 var WIZARD_AMOUNT = 4;
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 
 var setup = document.querySelector('.setup');
 var setupForm = document.querySelector('.setup-wizard-form');
@@ -122,8 +124,7 @@ setupWizardFireball.addEventListener('click', onClicksetupWizardFireball);
 
 // обработка нажатия клавиш на клавиатуре
 window.addEventListener('keydown', function (evt) {
-  // ENTER
-  if (evt.keyCode === 13) {
+  if (evt.keyCode === ENTER_KEYCODE) {
     evt.preventDefault();
     if (evt.target === setupOpenIcon) {
       onClickSetupOpen();
@@ -136,8 +137,7 @@ window.addEventListener('keydown', function (evt) {
     }
   }
 
-  // ESC
-  if (evt.keyCode === 27) {
+  if (evt.keyCode === ESC_KEYCODE) {
     evt.preventDefault();
     if (document.activeElement !== setupUserName) {
       onClickSetupClose();
