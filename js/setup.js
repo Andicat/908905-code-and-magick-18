@@ -107,6 +107,19 @@ function onClicksetupWizardFireball() {
   fireballColorValue[0].setAttribute('value', randomColor);
 }
 
+// валидация поля имени пользователя
+function invalidUserName() {
+  if (setupUserName.validity.tooShort) {
+    setupUserName.setCustomValidity('Имя волшебника должно состоять как минимум из 2-х символов');
+  } else if (setupUserName.validity.tooLong) {
+    setupUserName.setCustomValidity('Имя волшебника не должно превышать  25-ти символов');
+  } else if (setupUserName.validity.valueMissing) {
+    setupUserName.setCustomValidity('Обязательное поле');
+  } else {
+    setupUserName.setCustomValidity('');
+  }
+}
+
 setupOpenIcon.setAttribute('tabindex', '0');
 setupClose.setAttribute('tabindex', '0');
 setupUserName.setAttribute('minlength', 2);
@@ -121,6 +134,7 @@ setupClose.addEventListener('click', onClickSetupClose);
 setupWizardCoat.addEventListener('click', onClicksetupWizardCoat);
 setupWizardEyes.addEventListener('click', onClicksetupWizardEyes);
 setupWizardFireball.addEventListener('click', onClicksetupWizardFireball);
+setupUserName.addEventListener('input', invalidUserName);
 
 // обработка нажатия клавиш на клавиатуре
 window.addEventListener('keydown', function (evt) {
