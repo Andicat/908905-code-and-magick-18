@@ -69,8 +69,7 @@ function onClickSetupOpen() {
 }
 
 // валидация поля имени пользователя
-function invalidUserName(evt) {
-  evt.preventDefault();
+function invalidUserName() {
 
   if (setupUserName.validity.tooShort) {
     setupUserName.setCustomValidity('Имя волшебника должно состоять как минимум из 2-х символов');
@@ -89,7 +88,6 @@ function onSubmitSetupForm() {
 
 // обработка событий формы по клику
 function onClickSetupForm(evt) {
-  evt.preventDefault();
 
   var randomColor;
 
@@ -125,7 +123,6 @@ setupForm.method = 'POST';
 setupForm.enctype = 'multipart/form-data';
 
 setupForm.addEventListener('click', onClickSetupForm);
-setupForm.addEventListener('submit', onSubmitSetupForm);
 setupOpen.addEventListener('click', onClickSetupOpen);
 setupUserName.addEventListener('invalid', invalidUserName);
 
