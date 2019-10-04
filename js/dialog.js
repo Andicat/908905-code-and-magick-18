@@ -107,6 +107,13 @@
   setupOpen.addEventListener('click', onClickSetupOpen);
   setupUserName.addEventListener('invalid', invalidUserName);
 
+  setupForm.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(setupForm), function (response) {
+      setup.classList.add('hidden');
+    }, window.backend.onError);
+    evt.preventDefault();
+  });
+
   // обработка нажатия клавиш на клавиатуре
   window.addEventListener('keydown', function (evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
@@ -118,7 +125,7 @@
         setup.classList.add('hidden');
       }
       if (evt.target.classList.contains('setup-submit')) {
-        setupForm.submit();
+        //setupForm.submit();
       }
     }
 
