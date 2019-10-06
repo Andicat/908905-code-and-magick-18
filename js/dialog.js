@@ -108,7 +108,7 @@
   setupUserName.addEventListener('invalid', invalidUserName);
 
   setupForm.addEventListener('submit', function (evt) {
-    window.backend.save(new FormData(setupForm), function (response) {
+    window.backend.save(new FormData(setupForm), function () {
       setup.classList.add('hidden');
     }, window.backend.onError);
     evt.preventDefault();
@@ -124,16 +124,22 @@
       if (evt.target.classList.contains('setup-close')) {
         setup.classList.add('hidden');
       }
-      if (evt.target.classList.contains('setup-submit')) {
-        //setupForm.submit();
+      if (document.querySelector('.error')) {
+        document.querySelector('.error').remove();
+      } else if (evt.target.classList.contains('setup-submit')) {
+        setupForm.submit();
       }
     }
 
     if (evt.keyCode === ESC_KEYCODE) {
+      if (document.querySelector('.error')) {
+        document.querySelector('.error').remove();
+      } else
       if (document.activeElement !== setupUserName) {
         evt.preventDefault();
         setup.classList.add('hidden');
       }
     }
-  });
+  }
+  );
 })();
