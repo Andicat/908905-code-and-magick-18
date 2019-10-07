@@ -99,9 +99,6 @@
   setupForm.querySelector('.setup-close').setAttribute('tabindex', '0');
   setupUserName.setAttribute('minlength', 2);
   setupUserName.setAttribute('maxlength', 25);
-  setupForm.action = 'https://js.dump.academy/code-and-magick';
-  setupForm.method = 'POST';
-  setupForm.enctype = 'multipart/form-data';
 
   setupForm.addEventListener('click', onClickSetupForm);
   setupOpen.addEventListener('click', onClickSetupOpen);
@@ -110,7 +107,7 @@
   setupForm.addEventListener('submit', function (evt) {
     window.backend.save(new FormData(setupForm), function () {
       setup.classList.add('hidden');
-    }, window.backend.onError);
+    }, window.backend.showError);
     evt.preventDefault();
   });
 

@@ -29,14 +29,14 @@
   }
 
   // выбираем случайных волшебников из массива
-  function chooseRandomWizardsArray(arr, count) {
+  function getRandomWizardsArray(arr, count) {
     return arr.sort(function () {
       return Math.random() - 0.5;
     }).slice(0, count);
   }
 
   window.backend.load(function (wizards) {
-    createSimilarWizards(chooseRandomWizardsArray(wizards, WIZARD_AMOUNT));
+    createSimilarWizards(getRandomWizardsArray(wizards, WIZARD_AMOUNT));
     document.querySelector('.setup-similar').classList.remove('hidden');
-  });
+  }, window.backend.showError);
 })();
