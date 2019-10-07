@@ -99,13 +99,17 @@
   setupForm.querySelector('.setup-close').setAttribute('tabindex', '0');
   setupUserName.setAttribute('minlength', 2);
   setupUserName.setAttribute('maxlength', 25);
-  setupForm.action = 'https://js.dump.academy/code-and-magick';
-  setupForm.method = 'POST';
-  setupForm.enctype = 'multipart/form-data';
 
   setupForm.addEventListener('click', onClickSetupForm);
   setupOpen.addEventListener('click', onClickSetupOpen);
   setupUserName.addEventListener('invalid', invalidUserName);
+
+  setupForm.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(setupForm), function () {
+      setup.classList.add('hidden');
+    }, window.backend.showError);
+    evt.preventDefault();
+  });
 
   // обработка нажатия клавиш на клавиатуре
   window.addEventListener('keydown', function (evt) {
@@ -117,16 +121,22 @@
       if (evt.target.classList.contains('setup-close')) {
         setup.classList.add('hidden');
       }
-      if (evt.target.classList.contains('setup-submit')) {
+      if (document.querySelector('.error')) {
+        document.querySelector('.error').remove();
+      } else if (evt.target.classList.contains('setup-submit')) {
         setupForm.submit();
       }
     }
 
     if (evt.keyCode === ESC_KEYCODE) {
+      if (document.querySelector('.error')) {
+        document.querySelector('.error').remove();
+      } else
       if (document.activeElement !== setupUserName) {
         evt.preventDefault();
         setup.classList.add('hidden');
       }
     }
-  });
+  }
+  );
 })();
