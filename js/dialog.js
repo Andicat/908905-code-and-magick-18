@@ -9,6 +9,8 @@
   var setupOpenIcon = document.querySelector('.setup-open-icon');
   var setupUserName = document.querySelector('.setup-user-name');
   var setupAvatar = setup.querySelector('.upload');
+  var colorCoat = setupForm.querySelector('input[name = coat-color]').value;
+  var colorEyes = setupForm.querySelector('input[name = eyes-color]').value;
 
   // открытие окна настройки персонажа
   function onClickSetupOpen() {
@@ -35,10 +37,12 @@
       setup.classList.add('hidden');
     }
     if (evt.target.classList.contains('wizard-coat')) {
-      window.colorize(evt.target, window.coatColors, setupForm.querySelector('input[name = coat-color]'));
+      colorCoat = window.colorize(evt.target, window.coatColors, setupForm.querySelector('input[name = coat-color]'));
+      window.setup.updateWizards();
     }
     if (evt.target.classList.contains('wizard-eyes')) {
-      window.colorize(evt.target, window.eyesColors, setupForm.querySelector('input[name = eyes-color]'));
+      colorEyes = window.colorize(evt.target, window.eyesColors, setupForm.querySelector('input[name = eyes-color]'));
+      window.setup.updateWizards();
     }
     if (evt.target.classList.contains('setup-fireball')) {
       window.colorize(evt.target.parentElement, window.fireballColors, setupForm.querySelector('input[name = fireball-color]'));
@@ -139,4 +143,11 @@
     }
   }
   );
+
+  // экспорт
+  window.dialog = {
+    colorCoat: colorCoat,
+    colorEyes: colorEyes
+  };
+
 })();

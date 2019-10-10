@@ -20,5 +20,6 @@
       element.style.fill = randomColor;
     }
     input.value = randomColor;
+    return randomColor;
   };
 })();
