@@ -44,9 +44,13 @@
     }).slice(0, count);
   }
 
-  function updateWizards() {
-    console.log(window.dialog.colorCoat);
-    console.log(window.dialog.colorEyes);
+  function updateWizards(colorCoat,colorEyes) {
+    console.log(wizards);
+    var sameCoatWizards = wizards.filter(function(it) {
+      return it.colorCoat === colorCoat;
+    });
+    console.log(colorCoat);
+    console.log(colorEyes);
   }
 
   // экспорт
@@ -57,7 +61,6 @@
 
   window.backend.load(function (data) {
     wizards = data;
-    console.log(wizards);
     createSimilarWizards(getSimilarWizardsArray(wizards, WIZARD_AMOUNT));
     document.querySelector('.setup-similar').classList.remove('hidden');
   }, window.backend.showError);
