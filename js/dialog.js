@@ -40,13 +40,13 @@
       colorCoat = window.colorize(evt.target, window.coatColors, setupForm.querySelector('input[name = coat-color]'));
       window.debounce(function () {
         window.setup.updateWizards(colorCoat, colorEyes);
-      });
+      }());
     }
     if (evt.target.classList.contains('wizard-eyes')) {
       colorEyes = window.colorize(evt.target, window.eyesColors, setupForm.querySelector('input[name = eyes-color]'));
       window.debounce(function () {
         window.setup.updateWizards(colorCoat, colorEyes);
-      });
+      }());
     }
     if (evt.target.classList.contains('setup-fireball')) {
       window.colorize(evt.target.parentElement, window.fireballColors, setupForm.querySelector('input[name = fireball-color]'));
